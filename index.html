@@ -1,0 +1,171 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNAELAND - Vibrant Icelandic Adventures</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="index.html" class="brand">
+          <div class="logo">SNA</div>
+          <div class="brand-text">
+            SNAELAND
+            <small>Weaving Your Dreams</small>
+          </div>
+        </a>
+        <div class="main-nav">
+          <a href="index.html" class="active">Home</a>
+          <a href="about.html">About</a>
+          <a href="destinations.html">Destinations</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="packages.html">Packages</a>
+          <a href="booking.html">Booking</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Weaving Your Dreams into Vibrant Adventures</h1>
+        <p class="lead">Explore Iceland’s stunning landscapes — from cascading waterfalls to vibrant coastal cliffs.</p>
+        <div class="hero-cta">
+          <a href="booking.html" class="btn primary">Plan Your Adventure</a>
+          <a href="destinations.html" class="btn ghost">Explore Destinations</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="img/snaeland-hero-vibrant.jpg" alt="Icelandic landscape">
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <h3>95%</h3>
+        <p>Traveler Satisfaction</p>
+      </div>
+      <div class="stat">
+        <h3>70+</h3>
+        <p>Expert Guides</p>
+      </div>
+      <div class="stat">
+        <h3>250+</h3>
+        <p>Journeys Crafted</p>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="section-head">
+        <h2>Our Vision</h2>
+      </div>
+      <p>Inspired by Iceland’s vibrant landscapes, SNAELAND was born to create unforgettable travel experiences. Our passion drives us to craft dynamic, modern adventures for every explorer.</p>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Featured Destinations</h2>
+        <p class="subtitle">Discover Iceland’s vibrant beauty with curated experiences</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <img src="img/seljalandsfoss-heights.jpg" alt="Seljalandsfoss Heights">
+          <div class="card-body">
+            <h3>Seljalandsfoss Heights</h3>
+            <p>Marvel at cascading waterfalls framed by lush greenery.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="img/hraunfossar-cascades.jpg" alt="Hraunfossar Cascades">
+          <div class="card-body">
+            <h3>Hraunfossar Cascades</h3>
+            <p>Experience serene lava fields and flowing waters.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="img/vik-coastal-cliffs.jpg" alt="Vík Coastal Cliffs">
+          <div class="card-body">
+            <h3>Vík Coastal Cliffs</h3>
+            <p>Discover dramatic cliffs and vibrant coastal views.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-preview">
+      <div class="section-head">
+        <h2>Visual Journey</h2>
+        <p class="subtitle">Snapshots of Iceland’s dynamic landscapes.</p>
+      </div>
+      <div class="gallery-grid">
+        <img src="img/snaeland-vibrant1.jpg" alt="Icelandic scenery 1">
+        <img src="img/snaeland-vibrant2.jpg" alt="Icelandic scenery 2">
+        <img src="img/snaeland-vibrant3.jpg" alt="Icelandic scenery 3">
+        <img src="img/snaeland-vibrant4.jpg" alt="Icelandic scenery 4">
+      </div>
+      <div class="center">
+        <a href="gallery.html" class="btn outline">Explore Gallery</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>SNAELAND</strong>
+        <p>Your gateway to vibrant journeys.</p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>contact@snaelandtravel.com<br>Akureyri 600, Iceland<br>Instagram: @snaeland_adventures</p>
+      </div>
+    </div>
+    <div class="container site-legal">
+      SNAELAND — Terms & Conditions — © 2025. All Rights Reserved.
+    </div>
+  </footer>
+</body>
+</html>

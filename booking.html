@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking - SNAELAND</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="index.html" class="brand">
+          <div class="logo">SNA</div>
+          <div class="brand-text">
+            SNAELAND
+            <small>Weaving Your Dreams</small>
+          </div>
+        </a>
+        <div class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="destinations.html">Destinations</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="packages.html">Packages</a>
+          <a href="booking.html" class="active">Booking</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section-head">
+      <h2>Book Your Adventure</h2>
+      <p class="subtitle">Plan your vibrant Icelandic journey with SNAELAND.</p>
+    </section>
+
+    <section class="booking-form">
+      <h2>Reservation Details</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" name="full-name" required placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="start-date">Travel Start Date</label>
+          <input type="date" id="start-date" name="start-date" required>
+        </div>
+        <div class="form-group">
+          <label for="end-date">Travel End Date</label>
+          <input type="date" id="end-date" name="end-date" required>
+        </div>
+        <div class="form-group">
+          <label for="package">Select Package</label>
+          <select id="package" name="package" required>
+            <option value="" disabled selected>Choose a package</option>
+            <option value="aurora-escape">Aurora Escape</option>
+            <option value="midnight-sun-trek">Midnight Sun Trek</option>
+            <option value="volcanic-horizon">Volcanic Horizon Journey</option>
+            <option value="glacier-glow">Glacier Glow Adventure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="travelers">Number of Travelers</label>
+          <input type="number" id="travelers" name="travelers" min="1" required placeholder="Enter number of travelers">
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional Notes</label>
+          <textarea id="notes" name="notes" placeholder="Any special requests or details"></textarea>
+        </div>
+        <div class="center">
+          <button type="submit" class="btn primary">Submit Reservation</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>SNAELAND</strong>
+        <p>contact@snaelandtravel.com</p>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <p>Akureyri 600, Iceland<br>Instagram: @snaeland_adventures</p>
+      </div>
+    </div>
+    <div class="container site-legal">
+      SNAELAND — Terms & Conditions — © 2025. All Rights Reserved.
+    </div>
+  </footer>
+</body>
+</html>
